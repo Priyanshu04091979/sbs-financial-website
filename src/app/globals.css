@@ -1,5 +1,17 @@
 @import "tailwindcss";
 
+.section-padding {
+  @apply py-16 md:py-24 xl:py-32;
+}
+
+.section-margin {
+  @apply mt-16 md:mt-24 xl:mt-32;
+}
+
+.luxury-grid-gap {
+  @apply gap-10 lg:gap-16;
+}
+
 :root {
   --background: #fff8ef;
   --foreground: #1e1b13;

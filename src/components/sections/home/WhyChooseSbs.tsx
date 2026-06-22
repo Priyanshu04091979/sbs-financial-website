@@ -346,7 +346,7 @@ function CardItem({ card, isActive, isFlipped }: { card: CardData; isActive: boo
         <h3 style={{
           fontFamily: "var(--font-playfair), serif",
           fontSize: "22px", fontWeight: 700, fontStyle: "italic",
-          color: "#fff", margin: 0, lineHeight: 1.25,
+          color: "#fbf3e4", margin: 0, lineHeight: 1.25,
           letterSpacing: "-0.2px",
           textShadow: "0 2px 8px rgba(0,0,0,0.45)",
         }}>

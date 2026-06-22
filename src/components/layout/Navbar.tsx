@@ -4,149 +4,119 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-// ─────────────────────────────────────────────
-//  NAV CONFIG — add / remove links here freely
-// ─────────────────────────────────────────────
 const NAV_LINKS = [
-  { label: "Home",        href: "/" },
-  { label: "About Us",   href: "/about" },
-  { label: "Services",   href: "/services" },
-  { label: "Products",   href: "/products" },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
   { label: "Calculator", href: "/calculator" },
-  { label: "Contact",    href: "/contact" },
-  // { label: "Testimonials", href: "/testimonials" },
+  { label: "Contact", href: "/contact" },
 ];
 
-// ─────────────────────────────────────────────
-//  LOGO CONFIG — size yahan se change karo ✏️
-// ─────────────────────────────────────────────
-const LOGO_SRC = "/logo/Sbs-1.png";
-const LOGO_ALT = "SBS Financial Services";
-const LOGO_W   = 160;   // ← width pixels mein badao/ghatao
-const LOGO_H   = 52;    // ← height pixels mein badao/ghatao
-
-// ─────────────────────────────────────────────
-//  COLOR CONFIG — colors yahan se change karo ✏️
-// ─────────────────────────────────────────────
-const COLORS = {
-  navBg:          "#fbf3e4",        // navbar background
-  navBorder:      "#e8e8e8",        // bottom border
-  linkDefault:    "#333333",        // normal link color
-  linkActive:     "#111111",        // active/hover link color
-  activeUnderline:"#C9A84C",        // gold underline color ← yahan se change karo
-  ctaBg:          "transparent",    // bespoke button background ← transparent rakha
-  ctaColor:       "#111111",        // bespoke button text color
-  ctaBorder:      "#111111",        // bespoke button border color
-  ctaHoverBg:     "#111111",        // bespoke button hover background
-  ctaHoverColor:  "#ffffff",        // bespoke button hover text color
-};
-
-// ─────────────────────────────────────────────
-//  NAVBAR
-// ─────────────────────────────────────────────
 const NavbarSection: React.FC = () => {
-  const pathname                      = usePathname();
-  const [hoveredLink, setHoveredLink] = React.useState<string | null>(null);
-  const [ctaHover,    setCtaHover]    = React.useState(false);
+  const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   return (
-    <nav
-      style={{
-        position:        "fixed",
-        top:             0,
-        left:            0,
-        right:           0,
-        zIndex:          100,
-        backgroundColor: COLORS.navBg,
-        borderBottom:    `1px solid ${COLORS.navBorder}`,
-        display:         "flex",
-        alignItems:      "center",
-        justifyContent:  "space-between",
-        padding:         "0 48px",
-        height:          "64px",
-        fontFamily:      "'Montserrat', sans-serif",
-      }}
-    >
-      {/* ── Logo ── */}
-      <Link href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none" }}>
-        {LOGO_SRC ? (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#fbf3e4] border-b border-[#e8e8e8]">
+      
+      {/* CONTAINER FIX (IMPORTANT) */}
+      <div className="max-w-[1200px] mx-auto h-16 flex items-center justify-between px-4 sm:px-6 lg:px-8 font-[Montserrat]">
+
+        {/* LOGO */}
+        <Link href="/" className="flex items-center">
           <Image
-            src={LOGO_SRC}
-            alt={LOGO_ALT}
-            width={LOGO_W}
-            height={LOGO_H}
-            style={{ objectFit: "contain" }}
+            src="/logo/Sbs-1.png"
+            alt="SBS Financial Services"
+            width={140}
+            height={45}
+            className="object-contain"
             priority
           />
-        ) : (
-          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-            <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: "22px", color: "#111", letterSpacing: "0.02em" }}>
-              SBS
-            </span>
-            <span style={{ fontWeight: 500, fontSize: "13px", color: "#555", letterSpacing: "0.1em", textTransform: "uppercase", paddingLeft: "8px", borderLeft: "1px solid #ccc" }}>
-              Financial
-            </span>
-          </div>
-        )}
-      </Link>
+        </Link>
 
-      {/* ── Nav Links ── */}
-      <ul style={{ display: "flex", alignItems: "center", gap: "36px", listStyle: "none", margin: 0, padding: 0 }}>
+        {/* RIGHT SIDE (NAV + CTA) */}
+        <div className="hidden lg:flex items-center gap-6">
+
+          {/* NAV LINKS */}
+          <ul className="flex items-center gap-8">
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href;
+
+              return (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    className={`text-[12px] font-semibold tracking-[0.08em] uppercase pb-[2px] border-b-2 transition-all duration-200
+                    ${
+                      isActive
+                        ? "text-[#111] border-[#C9A84C]"
+                        : "text-[#333] border-transparent hover:text-[#111] hover:border-[#C9A84C]"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* CTA (FIXED POSITION) */}
+          <Link
+            href="/contact"
+            className="border border-black px-5 py-[8px] text-[11px] font-bold tracking-[0.08em] uppercase transition-all duration-200 hover:bg-black hover:text-white"
+          >
+            Contact Us
+          </Link>
+        </div>
+
+        {/* MOBILE MENU BUTTON (FIXED SPACING) */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="lg:hidden flex flex-col gap-[5px] p-2 -mr-2"
+        >
+        <span className="w-6 h-[2px] bg-black"></span>
+        <span className="w-6 h-[2px] bg-black"></span>
+        <span className="w-6 h-[2px] bg-black"></span>
+      </button>
+      </div>
+
+      {/* MOBILE MENU */}
+      <div
+        className={`fixed top-0 left-0 w-full h-screen bg-[#fbf3e4] flex flex-col items-center justify-center gap-8 transform transition-transform duration-300
+        ${menuOpen ? "translate-x-0" : "translate-x-full"}`}
+      >
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="absolute top-6 right-6 text-3xl"
+        >
+          ✕
+        </button>
+
         {NAV_LINKS.map((link) => {
-          // ✅ FIX: pathname se compare — no more static active
-          const isActive  = pathname === link.href;
-          const isHovered = hoveredLink === link.label;
+          const isActive = pathname === link.href;
 
           return (
-            <li key={link.label}>
-              <Link
-                href={link.href}
-                onMouseEnter={() => setHoveredLink(link.label)}
-                onMouseLeave={() => setHoveredLink(null)}
-                style={{
-                  textDecoration: "none",
-                  fontSize:       "12px",
-                  fontWeight:     600,
-                  letterSpacing:  "0.08em",
-                  textTransform:  "uppercase",
-                  color:          isActive || isHovered ? COLORS.linkActive : COLORS.linkDefault,
-                  paddingBottom:  "2px",
-                  borderBottom:   isActive  ? `2px solid ${COLORS.activeUnderline}`
-                                : isHovered ? `2px solid ${COLORS.activeUnderline}99`
-                                :             "2px solid transparent",
-                  transition:     "color 0.2s, border-bottom 0.2s",
-                }}
-              >
-                {link.label}
-              </Link>
-            </li>
+            <Link
+              key={link.label}
+              href={link.href}
+              onClick={() => setMenuOpen(false)}
+              className={`text-lg font-semibold uppercase tracking-[0.08em]
+              ${isActive ? "text-black" : "text-gray-600 hover:text-black"}`}
+            >
+              {link.label}
+            </Link>
           );
         })}
-      </ul>
 
-      {/* ── CTA Button ── ✅ FIX: transparent bg, border only */}
-      <Link
-        href="/contact"
-        onMouseEnter={() => setCtaHover(true)}
-        onMouseLeave={() => setCtaHover(false)}
-        style={{
-          display:         "inline-block",
-          backgroundColor: ctaHover ? COLORS.ctaHoverBg    : COLORS.ctaBg,
-          color:           ctaHover ? COLORS.ctaHoverColor  : COLORS.ctaColor,
-          border:          `1.5px solid ${COLORS.ctaBorder}`,
-          padding:         "9px 22px",
-          letterSpacing:   "0.08em",
-          textTransform:   "uppercase",
-          fontSize:        "11px",
-          fontWeight:      700,
-          textDecoration:  "none",
-          cursor:          "pointer",
-          transition:      "background 0.2s, color 0.2s",
-          fontFamily:      "'Montserrat', sans-serif",
-        }}
-      >
-        Contact Us
-      </Link>
+        <Link
+          href="/contact"
+          onClick={() => setMenuOpen(false)}
+          className="border border-black px-6 py-3 text-sm font-bold uppercase tracking-[0.08em] hover:bg-black hover:text-white"
+        >
+          Contact Us
+        </Link>
+      </div>
     </nav>
   );
 };

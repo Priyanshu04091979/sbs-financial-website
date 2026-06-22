@@ -30,6 +30,8 @@ const config: Config = {
 
         "sbs-outline": "#74777f",
         "sbs-outline-light": "#c4c6cf",
+
+        "sbs-hero": "#b8ab9e", 
       },
 
       maxWidth: {

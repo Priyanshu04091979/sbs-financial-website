@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import Container from "@/components/ui/Container";
+import { motion } from "framer-motion";
 
 
 const HERO_IMAGE = "/images/hero/Hero-section.jpg";
@@ -9,8 +11,7 @@ const styles: Record<string, React.CSSProperties> = {
   hero: {
     position: "relative",
     width: "100%",
-    height: "100vh",
-    minHeight: "600px",
+    minHeight: "100vh",
     display: "flex",
     alignItems: "center",
     overflow: "hidden",
@@ -29,14 +30,7 @@ const styles: Record<string, React.CSSProperties> = {
     backgroundColor: "rgba(0,0,0,0.60)",
     zIndex: 1,
   },
-  heroContent: {
-    position: "relative",
-    zIndex: 10,
-    padding: "0 80px",
-    maxWidth: "780px",
-    paddingTop: "64px",
-    fontFamily: "'Montserrat', sans-serif",
-  },
+  
   eyebrow: {
     display: "flex",
     alignItems: "center",
@@ -58,7 +52,6 @@ const styles: Record<string, React.CSSProperties> = {
   },
   headline: {
     fontFamily: "'Playfair Display', serif",
-    fontSize: "clamp(42px, 5vw, 68px)" as unknown as number,
     lineHeight: 1.08,
     color: "#fbf3e4",
     fontWeight: 700,
@@ -75,7 +68,7 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "flex-start",
     gap: "16px",
-    margin: "28px 0 48px",
+    margin: "24px 0 36px",
   },
   taglineBar: {
     width: "3px",
@@ -138,7 +131,12 @@ const HeroSection: React.FC = () => {
   const [secondaryHover, setSecondaryHover] = React.useState(false);
 
   return (
-    <section style={styles.hero}>
+    <motion.section
+    style={styles.hero}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.8 }}
+  >
       {/* Background image */}
       <div style={styles.heroBg} />
 
@@ -146,25 +144,55 @@ const HeroSection: React.FC = () => {
       <div style={styles.heroOverlay} />
 
       {/* Content */}
-      <div style={styles.heroContent}>
+      <Container className="relative z-10 pt-28 sm:pt-32">
+
+  <div className="max-w-[780px] max-sm:max-w-[310px]">
 
         {/* Headline */}
-        <h1 style={styles.headline}>
-          Plan, Invest, Grow —
+        <h1 style={styles.headline}
+            className="
+            text-[56px]
+            leading-[0.92]
+            tracking-[-0.03em]
+            sm:text-5xl
+            md:text-6xl
+            xl:text-7xl
+            "
+          >
+          Together We Create 
           <span style={styles.headlineItalic}>SBS Financial</span>
         </h1>
 
         {/* Tagline */}
-        <div style={styles.taglineWrap}>
+        <div style={styles.taglineWrap}
+            className="
+            mt-8
+            mb-10
+            md:mb-14
+            "
+          >
           <div style={styles.taglineBar} />
-          <p style={styles.taglineText}>
+          <p style={styles.taglineText}
+            className="
+            text-sm
+            md:text-base
+            "
+          >
             Precision-engineered wealth management for the modern global
             investor, where heritage meets innovation.
           </p>
         </div>
 
         {/* Buttons */}
-        <div style={styles.buttons}>
+        <div style={styles.buttons}
+            className="       
+            flex
+            flex-col
+            sm:flex-row
+            gap-4
+            w-full
+            "
+          >
           <a
             href="#"
             style={{
@@ -196,7 +224,8 @@ const HeroSection: React.FC = () => {
           </a>
         </div>
       </div>
-    </section>
+      </Container>
+    </motion.section>
   );
 };
 
