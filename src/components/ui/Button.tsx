@@ -36,7 +36,6 @@ export default function Button({
       bg-sbs-navy
       text-sbs-cream
       border-sbs-navy
-
       hover:bg-sbs-gold
       hover:text-sbs-navy
       hover:border-sbs-gold

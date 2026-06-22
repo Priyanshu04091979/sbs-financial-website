@@ -196,10 +196,15 @@ export default function Footer() {
               <Image
                 src="/logo/Sbs-1.png"
                 alt="SBS Financial Services"
-                width={156}
-                height={56}
-                style={{objectFit: "contain" }}
-              />
+                width={220}
+                height={72}
+                style={{
+                width: "220px",
+                height: "auto",
+                objectFit: "contain",
+            }}
+                priority
+            />
             </div>
             <span style={{ fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#735c00", display: "block", marginBottom: "16px", fontWeight: 500 }}>
               Financial Services
@@ -210,19 +215,19 @@ export default function Footer() {
 
             {/* Social Icons */}
             <div style={{ display: "flex", gap: "8px" }}>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Instagram">
+              <a href="https://www.instagram.com/sbsfinancial?igsh=MW01ZG9pM29obW0xbg==" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Instagram">
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#735c00" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="#735c00" strokeWidth="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#735c00"/></svg>
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Facebook">
+              <a href="https://www.facebook.com/share/1ETodRg3J2/" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Facebook">
                 <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
               </a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Twitter / X">
+              <a href="https://x.com/services5272" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Twitter / X">
                 <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.912-5.622z"/></svg>
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="LinkedIn">
+              <a href="https://www.linkedin.com/company/sbs-financials/" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="LinkedIn">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-4 0v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="YouTube">
+              <a href="https://youtube.com/@sbsfinancials?si=dKQ9457BVXpHwCHK" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="YouTube">
                 <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fbf3e4"/></svg>
               </a>
             </div>
