@@ -40,7 +40,9 @@ export default function ContactHero() {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden bg-[#FBF2EA] px-6 py-16 md:px-16 md:py-20"
+      style={{ paddingTop: "150px", paddingBottom: "100px" }}
+      /* ADDED: flex flex-col items-center to force horizontal centering of children */
+      className="relative w-full overflow-hidden bg-[#FBF2EA] px-6 pb-16 md:px-16 md:pb-24 scroll-mt-20 flex flex-col items-center"
     >
       {/* ambient pulsing glow accents */}
       <div className="glow-pulse pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-[#A9802F]/10 blur-3xl" />
@@ -49,7 +51,11 @@ export default function ContactHero() {
         style={{ animationDelay: "2s" }}
       />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col items-center gap-10 md:flex-row md:justify-between md:gap-8">
+      <div 
+        /* ADDED: inline style margin to override any global CSS resets */
+        style={{ margin: "0 auto" }}
+        className="relative flex max-w-6xl w-full flex-col items-center gap-10 md:flex-row md:justify-center md:gap-8 lg:gap-12"
+      >
         {/* Left image */}
         <div
           className={`order-2 shrink-0 md:order-1 transition-all duration-700 ease-out ${
@@ -71,12 +77,12 @@ export default function ContactHero() {
 
         {/* Center content */}
         <div
-          className={`order-1 flex w-full flex-col items-center text-center md:order-2 md:w-[52%] transition-all duration-700 ease-out ${
+          className={`order-1 flex w-full flex-col items-center text-center md:order-2 md:max-w-md transition-all duration-700 ease-out ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
           style={{ transitionDelay: "200ms", transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
         >
-          <span className="relative mb-4 inline-block text-xs font-semibold tracking-[0.25em] text-[#A9802F] md:text-sm">
+          <span className="relative mb-4 inline-block text-xs font-semibold tracking-[0.25em] text-[#A9802F] md:text-sm" style={{ marginBottom: "16px", marginTop: "8px" }}>
             GET IN TOUCH
             <span
               className={`absolute -bottom-2 left-1/2 h-px -translate-x-1/2 bg-[#A9802F] transition-all duration-700 ease-out ${
@@ -87,7 +93,7 @@ export default function ContactHero() {
           </span>
 
           <h2 className={`${playfair.className} leading-[1.1] text-[#16162B]`}>
-            <span className="block text-4xl font-semibold sm:text-5xl md:text-6xl">
+            <span className="block text-4xl font-semibold sm:text-5xl md:text-6xl mask-right" style={{ marginBottom: "8px", marginTop: "8px" }}>
               Ready to
             </span>
             <span className="shimmer-text mt-1 block bg-clip-text text-4xl font-semibold italic text-transparent sm:text-5xl md:text-6xl">
