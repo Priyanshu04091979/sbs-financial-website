@@ -1,9 +1,28 @@
 "use client";
 
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
+  const [phoneCopied, setPhoneCopied] = useState(false);
+
+  const handlePhoneClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Detect mobile or tablet screens
+    const isMobile = window.innerWidth < 768 || /Mobi|Android|iPhone/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // Let the native dialer trigger
+      return;
+    }
+
+    // On desktop/laptop, copy to clipboard instead of dialing
+    e.preventDefault();
+    navigator.clipboard.writeText("9081353523");
+    setPhoneCopied(true);
+    setTimeout(() => setPhoneCopied(false), 2000);
+  };
+
   return (
     <>
       <style>{`
@@ -128,6 +147,40 @@ export default function Footer() {
           transition: stroke 0.3s;
         }
         .sbs-contact-item:hover .sbs-contact-icon svg { stroke: #000613; }
+
+        /* Tooltips */
+        .sbs-tooltip {
+          position: absolute;
+          bottom: 100%;
+          left: 50%;
+          transform: translateX(-50%) translateY(-6px);
+          background: #0d1b3e;
+          color: #fff;
+          font-size: 10px;
+          padding: 4px 8px;
+          border-radius: 4px;
+          white-space: nowrap;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+          pointer-events: none;
+          z-index: 10;
+          transition: opacity 0.2s, transform 0.2s;
+        }
+        .sbs-tooltip::after {
+          content: '';
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          border-width: 4px;
+          border-style: solid;
+          border-color: #0d1b3e transparent transparent transparent;
+        }
+        .sbs-tooltip-success {
+          background: #735c00 !important;
+        }
+        .sbs-tooltip-success::after {
+          border-color: #735c00 transparent transparent transparent !important;
+        }
       `}</style>
 
       <footer
@@ -199,12 +252,12 @@ export default function Footer() {
                 width={220}
                 height={72}
                 style={{
-                width: "220px",
-                height: "auto",
-                objectFit: "contain",
-            }}
+                  width: "220px",
+                  height: "auto",
+                  objectFit: "contain",
+                }}
                 priority
-            />
+              />
             </div>
             <span style={{ fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#735c00", display: "block", marginBottom: "16px", fontWeight: 500 }}>
               Financial Services
@@ -262,9 +315,9 @@ export default function Footer() {
               <span style={{ position: "absolute", bottom: 0, left: 0, width: "22px", height: "1px", background: "#e9c349", display: "block" }} />
             </span>
 
+            {/* Address */}
             <div className="sbs-contact-item">
               <div className="sbs-contact-icon">
-                {/* Replace SVG with: <Image src="/icons/location.png" width={14} height={14} alt="location" style={{position:"relative",zIndex:1}} /> */}
                 <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
               </div>
               <span style={{ fontSize: "12px", color: "#43474e", lineHeight: 1.65, fontWeight: 300 }}>
@@ -275,21 +328,53 @@ export default function Footer() {
               </span>
             </div>
 
-            <div className="sbs-contact-item">
+            {/* Clickable/Copyable Mobile No. */}
+            <a
+              href="tel:9081353523"
+              onClick={handlePhoneClick}
+              className="sbs-contact-item group"
+              style={{ textDecoration: "none", color: "inherit", cursor: "pointer" }}
+            >
               <div className="sbs-contact-icon">
-                {/* Replace SVG with: <Image src="/icons/phone.png" width={14} height={14} alt="phone" style={{position:"relative",zIndex:1}} /> */}
                 <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.19 2 2 0 012 .01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
               </div>
-              <span style={{ fontSize: "12px", color: "#43474e", lineHeight: 1.65, fontWeight: 300 }}>9081353523</span>
-            </div>
+              <div style={{ position: "relative" }}>
+                <span style={{ fontSize: "12px", color: "#43474e", lineHeight: 1.65, fontWeight: 300 }} className="hover:text-[#735c00] transition-colors">
+                  9081353523
+                </span>
+                
+                {/* Hover Tooltip: Desktop only */}
+                <span className="sbs-tooltip opacity-0 group-hover:md:opacity-100 transition-opacity duration-200 hidden md:block">
+                  Click to copy
+                </span>
+                
+                {/* Success Tooltip: Triggers on successful copy */}
+                <span className={`sbs-tooltip sbs-tooltip-success opacity-0 transition-opacity duration-200 ${phoneCopied ? "opacity-100" : ""}`}>
+                  Copied!
+                </span>
+              </div>
+            </a>
 
+            {/* Email */}
             <div className="sbs-contact-item">
               <div className="sbs-contact-icon">
-                {/* Replace SVG with: <Image src="/icons/mail.png" width={14} height={14} alt="mail" style={{position:"relative",zIndex:1}} /> */}
                 <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               </div>
               <span style={{ fontSize: "12px", color: "#735c00", lineHeight: 1.65, fontWeight: 300 }}>Sbsfin27@gmail.com</span>
             </div>
+
+            {/* Blended Timings Row */}
+            <div className="sbs-contact-item">
+              <div className="sbs-contact-icon">
+                <svg viewBox="0 0 24 24">
+                  <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <span style={{ fontSize: "12px", color: "#43474e", lineHeight: 1.65, fontWeight: 300 }}>
+                Mon – Sat, 9 AM – 6 PM
+              </span>
+            </div>
+
           </div>
         </div>
 
