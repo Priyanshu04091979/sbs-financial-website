@@ -8,7 +8,7 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Products", href: "/products" },
+  //* { label: "Products", href: "/products" }, *//
   { label: "Calculator", href: "/calculator" },
   { label: "Contact", href: "/contact" },
 ];
@@ -60,14 +60,6 @@ const NavbarSection: React.FC = () => {
               );
             })}
           </ul>
-
-          {/* CTA (FIXED POSITION) */}
-          <Link
-            href="/contact"
-            className="border border-black px-5 py-[8px] text-[11px] font-bold tracking-[0.08em] uppercase transition-all duration-200 hover:bg-black hover:text-white"
-          >
-            Contact Us
-          </Link>
         </div>
 
         {/* MOBILE MENU BUTTON (FIXED SPACING) */}
