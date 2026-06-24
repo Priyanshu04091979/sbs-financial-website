@@ -180,18 +180,133 @@ export default function Footer() {
         }
         .sbs-tooltip-success::after {
           border-color: #735c00 transparent transparent transparent !important;
+        /* ── RESPONSIVE GRID ── */
+        .sbs-footer-grid {
+          display: grid;
+          grid-template-columns: 1.8fr 1fr 1fr 1.3fr;
+          gap: 44px;
+          padding-bottom: 48px;
+          position: relative;
+          z-index: 1;
+        }
+
+        /* Tablet: 2-column layout */
+        @media (max-width: 900px) {
+          .sbs-footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+          }
+          /* Brand column spans full width on tablet */
+          .sbs-footer-brand-col {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        /* Mobile: single column */
+        @media (max-width: 540px) {
+          .sbs-footer-grid {
+            grid-template-columns: 1fr;
+            gap: 28px;
+          }
+          .sbs-footer-brand-col {
+            grid-column: auto;
+          }
+        }
+
+        /* Footer outer padding responsive */
+        .sbs-footer-outer {
+          background: #fff8ef;
+          padding: 60px 48px 0;
+          position: relative;
+          overflow: hidden;
+          font-family: var(--font-inter), sans-serif;
+        }
+        @media (max-width: 900px) {
+          .sbs-footer-outer {
+            padding: 48px 28px 0;
+          }
+        }
+        @media (max-width: 540px) {
+          .sbs-footer-outer {
+            padding: 36px 18px 0;
+          }
+        }
+
+        /* Bottom bar responsive */
+        .sbs-footer-bottom {
+          border-top: 1px solid rgba(233,195,73,0.2);
+          padding: 18px 0;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 10px;
+          position: relative;
+          z-index: 1;
+        }
+        @media (max-width: 600px) {
+          .sbs-footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+          }
+          .sbs-footer-bottom-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+          }
+        }
+
+        /* Logo fix */
+        .sbs-footer-logo-wrap {
+          display: block;
+          margin-bottom: 14px;
+          line-height: 0;
+        }
+        .sbs-footer-logo-wrap img {
+          width: 200px;
+          height: auto;
+          display: block;
+        }
+        @media (max-width: 900px) {
+          .sbs-footer-logo-wrap img {
+            width: 180px;
+          }
+        }
+        @media (max-width: 540px) {
+          .sbs-footer-logo-wrap img {
+            width: 160px;
+          }
+        }
+
+        /* Social icons row */
+        .sbs-social-row {
+          display: flex;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+
+        /* Marquee container */
+        .sbs-marquee-wrap {
+          overflow: hidden;
+          position: relative;
+          border-top: 1px solid rgba(233,195,73,0.25);
+          border-bottom: 1px solid rgba(233,195,73,0.25);
+          padding: 14px 0;
+          margin-bottom: 52px;
+          background-color: #fbf3e4;
+        }
+        @media (max-width: 540px) {
+          .sbs-marquee-wrap {
+            margin-bottom: 32px;
+          }
         }
       `}</style>
 
-      <footer
-        style={{
-          background: "#fff8ef",
-          padding: "60px 48px 0",
-          position: "relative",
-          overflow: "hidden",
-          fontFamily: "var(--font-inter), sans-serif",
-        }}
-      >
+      <footer className="sbs-footer-outer">
         {/* Top gold border */}
         <div
           style={{
@@ -203,20 +318,10 @@ export default function Footer() {
         />
 
         {/* Marquee */}
-        <div
-          style={{
-            overflow: "hidden",
-            position: "relative",
-            borderTop: "1px solid rgba(233,195,73,0.25)",
-            borderBottom: "1px solid rgba(233,195,73,0.25)",
-            padding: "14px 0",
-            marginBottom: "52px",
-            backgroundColor: "#fbf3e4",
-          }}
-        >
+        <div className="sbs-marquee-wrap">
           {/* Fade edges */}
-          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "80px", background: "linear-gradient(90deg,#fbf3e4,transparent)", zIndex: 2, pointerEvents: "none" }} />
-          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "80px", background: "linear-gradient(270deg,#fbf3e4,transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, left: 0, width: "60px", background: "linear-gradient(90deg,#fbf3e4,transparent)", zIndex: 2, pointerEvents: "none" }} />
+          <div style={{ position: "absolute", top: 0, bottom: 0, right: 0, width: "60px", background: "linear-gradient(270deg,#fbf3e4,transparent)", zIndex: 2, pointerEvents: "none" }} />
 
           <div className="sbs-footer-marquee">
             {[...Array(2)].map((_, i) => (
@@ -233,20 +338,14 @@ export default function Footer() {
         </div>
 
         {/* Main Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1.8fr 1fr 1fr 1.3fr",
-            gap: "44px",
-            paddingBottom: "48px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="sbs-footer-grid">
+
           {/* Brand Column */}
-          <div>
-            <div style={{ marginBottom: "14px" }}>
-              <Image
+          <div className="sbs-footer-brand-col">
+            {/* Logo — natural size, no whitespace */}
+            <div className="sbs-footer-logo-wrap">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src="/logo/Sbs-1.png"
                 alt="SBS Financial Services"
                 width={220}
@@ -256,18 +355,20 @@ export default function Footer() {
                   height: "auto",
                   objectFit: "contain",
                 }}
-                priority
+                
+                loading="eager"
               />
             </div>
+
             <span style={{ fontSize: "9px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#735c00", display: "block", marginBottom: "16px", fontWeight: 500 }}>
               Financial Services
             </span>
-            <p style={{ fontSize: "12px", lineHeight: 1.78, color: "#43474e", fontWeight: 300, maxWidth: "220px", marginBottom: "22px" }}>
+            <p style={{ fontSize: "12px", lineHeight: 1.78, color: "#43474e", fontWeight: 300, maxWidth: "260px", marginBottom: "22px" }}>
               SBS Financial Services delivers personalized financial advisory and wealth management solutions focused on long-term financial confidence and stability.
             </p>
 
             {/* Social Icons */}
-            <div style={{ display: "flex", gap: "8px" }}>
+            <div className="sbs-social-row">
               <a href="https://www.instagram.com/sbsfinancial?igsh=MW01ZG9pM29obW0xbg==" target="_blank" rel="noopener noreferrer" className="sbs-social-btn" title="Instagram">
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="#735c00" strokeWidth="1.8"/><circle cx="12" cy="12" r="4" fill="none" stroke="#735c00" strokeWidth="1.8"/><circle cx="17.5" cy="6.5" r="1.2" fill="#735c00"/></svg>
               </a>
@@ -288,7 +389,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <span style={{ fontSize: "12px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#000613", fontWeight: 500, marginBottom: "20px", display: "block", position: "relative", paddingBottom: "10px", borderBottom: "none" }}>
+            <span style={{ fontSize: "12px", letterSpacing: "0.28em", textTransform: "uppercase", color: "#000613", fontWeight: 500, marginBottom: "20px", display: "block", position: "relative", paddingBottom: "10px" }}>
               Quick Links
               <span style={{ position: "absolute", bottom: 0, left: 0, width: "22px", height: "1px", background: "#e9c349", display: "block" }} />
             </span>
@@ -379,23 +480,11 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div
-          style={{
-            borderTop: "1px solid rgba(233,195,73,0.2)",
-            padding: "18px 0",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "10px",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
+        <div className="sbs-footer-bottom">
           <span style={{ fontSize: "11px", color: "rgba(67,71,78,0.5)" }}>
             © 2026 SBS Financial Services. All rights reserved.
           </span>
-          <div style={{ display: "flex", gap: "20px" }}>
+          <div className="sbs-footer-bottom-links" style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
             <Link href="/privacy-policy" className="sbs-footer-legal-link">Privacy Policy</Link>
             <Link href="/terms" className="sbs-footer-legal-link">Terms &amp; Conditions</Link>
             <Link href="/disclaimer" className="sbs-footer-legal-link">Disclaimer</Link>
