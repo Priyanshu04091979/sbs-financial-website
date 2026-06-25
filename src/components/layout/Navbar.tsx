@@ -8,8 +8,12 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
+<<<<<<< HEAD
+  { label: "Calculator", href: "/calculators" },
+=======
   //* { label: "Products", href: "/products" }, *//
   { label: "Calculator", href: "/calculator" },
+>>>>>>> main
   { label: "Contact", href: "/contact" },
 ];
 
@@ -30,6 +34,7 @@ const NavbarSection: React.FC = () => {
             alt="SBS Financial Services"
             width={140}
             height={45}
+            style={{ width: "140px", height: "auto", display: "block" }}
             className="object-contain"
             priority
           />
@@ -60,6 +65,11 @@ const NavbarSection: React.FC = () => {
               );
             })}
           </ul>
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> main
         </div>
 
         {/* MOBILE MENU BUTTON (FIXED SPACING) */}
@@ -101,13 +111,7 @@ const NavbarSection: React.FC = () => {
           );
         })}
 
-        <Link
-          href="/contact"
-          onClick={() => setMenuOpen(false)}
-          className="border border-black px-6 py-3 text-sm font-bold uppercase tracking-[0.08em] hover:bg-black hover:text-white"
-        >
-          Contact Us
-        </Link>
+
       </div>
     </nav>
   );

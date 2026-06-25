@@ -1,43 +1,20 @@
 "use client";
 
 import { Playfair_Display } from "next/font/google";
-import { useEffect, useRef, useState } from "react";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["600", "700"],
+  weight: ["500", "600"],
   style: ["normal", "italic"],
 });
 
-function useInView<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, inView };
-}
-
 export default function ContactHero() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-
   return (
+<<<<<<< HEAD
+    <section className="w-full bg-[#fff8ef] rounded-b-[28px] px-8 py-12 md:pb-14 md:pt-12">
+      <div className="max-w-[1100px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-[28px] items-center">
+
+=======
     <section
       ref={ref}
       style={{ paddingTop: "150px", paddingBottom: "100px" }}
@@ -56,26 +33,28 @@ export default function ContactHero() {
         style={{ margin: "0 auto" }}
         className="relative flex max-w-6xl w-full flex-col items-center gap-10 md:flex-row md:justify-center md:gap-8 lg:gap-12"
       >
+>>>>>>> main
         {/* Left image */}
-        <div
-          className={`order-2 shrink-0 md:order-1 transition-all duration-700 ease-out ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-          style={{ transitionDelay: "100ms", transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
-        >
-          <div className="float-img group relative w-40 overflow-hidden rounded-2xl shadow-md ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-2xl hover:ring-[#A9802F]/30 sm:w-48 md:w-56 lg:w-64" style={{ aspectRatio: "5 / 4" }}>
-            <img
-              src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=800&auto=format&fit=crop"
-              alt="Starry night sky"
-              loading="eager"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          </div>
+        <div className="hidden md:block h-[210px] rounded-[14px] overflow-hidden border border-[#c4c6cf]">
+          <img
+            src="https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?q=80&w=800&auto=format&fit=crop"
+            alt="Starry night sky"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         {/* Center content */}
+<<<<<<< HEAD
+        <div className="text-center">
+          <span className="text-[12px] font-semibold tracking-[0.2em] text-[#735c00] uppercase mb-[18px] block">
+            Get In Touch
+          </span>
+          <h1 className={`${playfair.className} font-medium text-[36px] sm:text-[42px] md:text-[48px] leading-[1.15] text-[#000613] m-0 mb-[22px]`}>
+            Ready to
+            <em className="font-medium italic block not-italic">Take Control?</em>
+          </h1>
+          <p className="text-[15px] text-[#43474e] leading-normal max-w-md mx-auto">
+=======
         <div
           className={`order-1 flex w-full flex-col items-center text-center md:order-2 md:max-w-md transition-all duration-700 ease-out ${
             inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
@@ -107,94 +86,21 @@ export default function ContactHero() {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
+>>>>>>> main
             We&apos;re here to guide you toward financial clarity and confidence.
           </p>
         </div>
 
         {/* Right image */}
-        <div
-          className={`order-3 shrink-0 transition-all duration-700 ease-out ${
-            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-          style={{ transitionDelay: "300ms", transitionTimingFunction: "cubic-bezier(0.34, 1.56, 0.64, 1)" }}
-        >
-          <div className="float-img-delayed group relative w-40 overflow-hidden rounded-2xl shadow-md ring-1 ring-black/5 transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] hover:shadow-2xl hover:ring-[#A9802F]/30 sm:w-48 md:w-56 lg:w-64" style={{ aspectRatio: "5 / 4" }}>
-            <img
-              src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
-              alt="String lights over a cobblestone alley"
-              loading="eager"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-          </div>
+        <div className="hidden md:block h-[210px] rounded-[14px] overflow-hidden border border-[#c4c6cf]">
+          <img
+            src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800&auto=format&fit=crop"
+            alt="String lights over a cobblestone alley"
+            className="w-full h-full object-cover"
+          />
         </div>
+
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px) rotate(0deg);
-          }
-          50% {
-            transform: translateY(-16px) rotate(-1deg);
-          }
-        }
-        .float-img {
-          animation: float 4.5s ease-in-out infinite;
-        }
-        .float-img-delayed {
-          animation: float 4.5s ease-in-out infinite;
-          animation-delay: 1.4s;
-        }
-
-        @keyframes glowPulse {
-          0%,
-          100% {
-            transform: scale(1);
-            opacity: 0.7;
-          }
-          50% {
-            transform: scale(1.25);
-            opacity: 1;
-          }
-        }
-        .glow-pulse {
-          animation: glowPulse 5s ease-in-out infinite;
-        }
-
-        .shimmer-text {
-          background-image: linear-gradient(
-            100deg,
-            #16162b 30%,
-            #a9802f 45%,
-            #16162b 60%
-          );
-          background-size: 250% 100%;
-          animation: shimmer 4.5s ease-in-out infinite;
-        }
-        @keyframes shimmer {
-          0% {
-            background-position: 100% 0;
-          }
-          50% {
-            background-position: 0% 0;
-          }
-          100% {
-            background-position: -100% 0;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .float-img,
-          .float-img-delayed,
-          .glow-pulse,
-          .shimmer-text {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }

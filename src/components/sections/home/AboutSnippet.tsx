@@ -389,9 +389,10 @@ export default function AboutSnippet() {
               >
                 {/* Replace src="/image.png" with actual founder image */}
                 <Image
-                  src="/image.png"
+                  src="/images/founder.png"
                   alt="Mr. Urval Shah"
                   fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   style={{ objectFit:"cover", objectPosition:"center center" }}
                   priority
                 />
