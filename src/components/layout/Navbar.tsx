@@ -8,12 +8,8 @@ const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
-<<<<<<< HEAD
-  { label: "Calculator", href: "/calculators" },
-=======
   //* { label: "Products", href: "/products" }, *//
   { label: "Calculator", href: "/calculator" },
->>>>>>> main
   { label: "Contact", href: "/contact" },
 ];
 
@@ -65,11 +61,6 @@ const NavbarSection: React.FC = () => {
               );
             })}
           </ul>
-<<<<<<< HEAD
-
-
-=======
->>>>>>> main
         </div>
 
         {/* MOBILE MENU BUTTON (FIXED SPACING) */}
